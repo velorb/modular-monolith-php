@@ -1,0 +1,7 @@
+if [ -f /usr/local/etc/php/conf.d/xdebug.ini ]; then
+  mv /usr/local/etc/php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini.disabled
+  kill -USR2 1
+  echo "xdebug disabled"
+else
+  echo "xdebug  disabled"
+fi;

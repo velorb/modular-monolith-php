@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\User\Infrastructure\Persistence\Doctrine\Mapping;
+
+use App\Shared\Infrastructure\Persistence\Doctrine\Mapping\DoctrineUuidType;
+use App\User\Core\User\UserSsoId;
+
+class UserSsoIdType extends DoctrineUuidType
+{
+    protected function getValueObjectClassName(): string
+    {
+        return UserSsoId::class;
+    }
+
+    public function getName(): string
+    {
+        return 'user-user_sso_id';
+    }
+}

@@ -43,4 +43,6 @@ RUN chmod +x /usr/local/bin/xdebug-disable \
     && usermod -u ${HOST_USER_ID} www-data \
     && groupmod -g ${HOST_USER_ID} www-data
 
+USER www-data
+
 CMD ["php-fpm"]

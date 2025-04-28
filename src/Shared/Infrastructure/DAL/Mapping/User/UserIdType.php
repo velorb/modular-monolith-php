@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Persistence\Doctrine\Mapping\User;
+namespace App\Shared\Infrastructure\DAL\Mapping\User;
 
 use App\Shared\Domain\User\UserId;
-use App\Shared\Infrastructure\Persistence\Doctrine\Mapping\DoctrineUlidType;
+use App\Shared\Infrastructure\DAL\Mapping\DoctrineUlidType;
 
 class UserIdType extends DoctrineUlidType
 {

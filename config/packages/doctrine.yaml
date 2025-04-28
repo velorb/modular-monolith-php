@@ -9,8 +9,8 @@ doctrine:
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
         types:
-            s-user-user_id: App\Shared\Infrastructure\Persistence\Doctrine\Mapping\User\UserIdType
-            user-user_sso_id: App\User\Infrastructure\Persistence\Doctrine\Mapping\UserSsoIdType
+            s-user-user_id: App\Shared\Infrastructure\DAL\Mapping\User\UserIdType
+            user-user_sso_id: App\User\Infrastructure\DAL\Mapping\UserSsoIdType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -24,7 +24,7 @@ doctrine:
             App\User:
                 type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/User/Infrastructure/Persistence/Doctrine/Mapping'
+                dir: '%kernel.project_dir%/src/User/Infrastructure/DAL/Mapping'
                 prefix: 'App\User\Core'
                 alias: App
         controller_resolver:

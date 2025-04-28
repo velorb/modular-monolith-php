@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Persistence\Doctrine\Mapping;
+namespace App\User\Infrastructure\DAL\Mapping;
 
-use App\Shared\Infrastructure\Persistence\Doctrine\Mapping\DoctrineUuidType;
+use App\Shared\Infrastructure\DAL\Mapping\DoctrineUuidType;
 use App\User\Core\User\UserSsoId;
 
 class UserSsoIdType extends DoctrineUuidType

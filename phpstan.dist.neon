@@ -1,0 +1,20 @@
+includes:
+    - vendor/phpat/phpat/extension.neon
+
+services:
+    -
+        class: App\Tests\Architecture\UserArchitectureTest
+        tags:
+            - phpat.test
+    -
+        class: App\Tests\Architecture\MenuCatalogArchitectureTest
+        tags:
+            - phpat.test
+parameters:
+    level: 10
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/

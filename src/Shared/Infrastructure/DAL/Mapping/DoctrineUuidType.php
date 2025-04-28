@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Persistence\Doctrine\Mapping;
+namespace App\Shared\Infrastructure\DAL\Mapping;
 
-use App\Shared\Domain\Id\Ulid;
+use App\Shared\Domain\Id\Uuid;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
-abstract class DoctrineUlidType extends Type
+abstract class DoctrineUuidType extends Type
 {
-    private const int ULID_LENGTH = 26;
+    private const int UUID_LENGTH = 36;
 
     /**
      * Returns the fully qualified class name of the value object.
@@ -25,7 +25,7 @@ abstract class DoctrineUlidType extends Type
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getStringTypeDeclarationSQL([
-            'length' => self::ULID_LENGTH,
+            'length' => self::UUID_LENGTH,
             'fixed' => true,
         ]);
     }
@@ -36,16 +36,22 @@ abstract class DoctrineUlidType extends Type
             return null;
         }
 
-        $class = $this->getValueObjectClassName();
-        if (!$value instanceof Ulid) {
-            throw new \InvalidArgumentException(
-                sprintf('Expected instance of %s, got %s', $class, get_debug_type($value))
-            );
+        if ($value instanceof Uuid) {
+            return (string)$value;
         }
 
-        return $value->value;
+        throw new \InvalidArgumentException(
+            sprintf('Expected instance of %s, got %s', Uuid::class, get_debug_type($value))
+        );
     }
 
+    /**
+     * Converts database value to PHP value.
+     *
+     * @param mixed $value
+     * @param AbstractPlatform $platform
+     * @return object|null
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?object
     {
         if ($value === null) {
@@ -53,12 +59,11 @@ abstract class DoctrineUlidType extends Type
         }
 
         $className = $this->getValueObjectClassName();
-
         if ($value instanceof $className) {
             return $value;
         }
 
-        return new $className((string)$value);
+        return new $className($value);
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

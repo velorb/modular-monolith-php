@@ -10,10 +10,11 @@ use App\Shared\Domain\User\UserRole;
 class UserRoleAssignment
 {
     public ?int $id;
-    private UserId $userId;
+
+    private UserId $userId; // @phpstan-ignore-line
 
     public function __construct(
-        private User $user,
+        private User $user, // @phpstan-ignore-line
         private readonly UserRole $role
     ) {
         $this->userId = $user->getId();

@@ -28,8 +28,6 @@ RUN echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)"
     echo "xdebug.force_display_errors=0" >> /usr/local/etc/php/conf.d/xdebug.ini && \
     echo "xdebug.force_error_reporting=0" >> /usr/local/etc/php/conf.d/xdebug.ini && \
     echo "xdebug.start_with_request=trigger" >> /usr/local/etc/php/conf.d/xdebug.ini && \
-    echo 'xdebug.output_dir="/var/www/html/app/_ci-cd/reports/dev/profiling"' >> /usr/local/etc/php/conf.d/xdebug.ini && \
-    echo "xdebug.profiler_output_name=cachegrind.out.%R.%t" >> /usr/local/etc/php/conf.d/xdebug.ini && \
     echo "xdebug.client_host=${XDEBUG_CLIENT_HOST}" >> /usr/local/etc/php/conf.d/xdebug.ini && \
     echo "xdebug.client_port=${XDEBUG_CLIENT_PORT}" >> /usr/local/etc/php/conf.d/xdebug.ini && \
     echo "xdebug.discover_client_host=0" >> /usr/local/etc/php/conf.d/xdebug.ini && \
@@ -44,5 +42,7 @@ RUN chmod +x /usr/local/bin/xdebug-disable \
     && groupmod -g ${HOST_USER_ID} www-data
 
 USER www-data
+
+WORKDIR /var/www/html/app
 
 CMD ["php-fpm"]

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Integration\User\Infrastructure\Persistence\Doctrine\Repository;
+namespace App\Tests\Integration\User\Infrastructure\DAL\Repository;
 
 use App\Shared\Domain\User\UserRole;
 use App\Tests\Support\IntegrationTestCase;
 use App\Tests\Support\ObjectMother\Shared\Domain\User\UserIdOM;
 use App\Tests\Support\ObjectMother\User\Core\User\UserSsoIdOM;
 use App\User\Core\User\User;
-use App\User\Infrastructure\Persistence\Doctrine\Repository\UserDoctrineRepository;
+use App\User\Infrastructure\DAL\Repository\UserDoctrineRepository;
 use PHPUnit\Framework\Attributes\Test;
 
 class UserDoctrineRepositoryTest extends IntegrationTestCase
@@ -19,7 +19,7 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->userRepository = self::getContainer()->get(UserDoctrineRepository::class);
+        $this->userRepository = self::getServiceByClassName(UserDoctrineRepository::class);
     }
 
     #[Test]
@@ -39,11 +39,6 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
         $this->assertEquals($user->getId(), $userFromDb->getId());
         $this->assertTrue($user->getSsoId()->equals($userFromDb->getSsoId()));
         $this->assertEquals($user->getUsername(), $userFromDb->getUsername());
-        $this->assertEquals($user->getRoles(), [UserRole::ADMIN, UserRole::USER]);
-    }
-
-    public function findById_return()
-    {
-
+        $this->assertEquals([UserRole::ADMIN, UserRole::USER], $user->getRoles());
     }
 }

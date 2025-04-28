@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Persistence\Doctrine\Mapping;
+namespace App\Shared\Infrastructure\DAL\Mapping;
 
+use App\Shared\Domain\Id\Ulid;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
-abstract class DoctrineUuidType extends Type
+abstract class DoctrineUlidType extends Type
 {
-    private const int UUID_LENGTH = 36;
+    private const int ULID_LENGTH = 26;
 
     /**
      * Returns the fully qualified class name of the value object.
@@ -24,7 +25,7 @@ abstract class DoctrineUuidType extends Type
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getStringTypeDeclarationSQL([
-            'length' => self::UUID_LENGTH,
+            'length' => self::ULID_LENGTH,
             'fixed' => true,
         ]);
     }
@@ -36,7 +37,7 @@ abstract class DoctrineUuidType extends Type
         }
 
         $class = $this->getValueObjectClassName();
-        if (!$value instanceof $class) {
+        if (!$value instanceof Ulid) {
             throw new \InvalidArgumentException(
                 sprintf('Expected instance of %s, got %s', $class, get_debug_type($value))
             );
@@ -45,13 +46,6 @@ abstract class DoctrineUuidType extends Type
         return $value->value;
     }
 
-    /**
-     * Converts database value to PHP value.
-     *
-     * @param mixed $value
-     * @param AbstractPlatform $platform
-     * @return object|null
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?object
     {
         if ($value === null) {
@@ -59,11 +53,11 @@ abstract class DoctrineUuidType extends Type
         }
 
         $className = $this->getValueObjectClassName();
-        if ($value instanceof $className) {
+        if ($value instanceof $className && $value instanceof Ulid) {
             return $value;
         }
 
-        return new $className((string)$value);
+        return new $className($value);
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

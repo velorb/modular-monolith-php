@@ -7,6 +7,7 @@
         <env name="APP_DEBUG" value="0"/>
         <env name="DATABASE_URL" value="pgsql://user_test:password_test@postgres-test:5432/app_db_test"/>
         <env name="KERNEL_CLASS" value="App\Shared\Infrastructure\Kernel"/>
+        <env name="APP_RESET_DATABASE" value="0"/>
     </php>
     <testsuites>
         <testsuite name="unit">

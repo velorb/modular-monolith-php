@@ -35,7 +35,9 @@
     "autoload-dev": {
         "psr-4": {
             "App\\Tests\\Integration\\": "tests/integration",
-            "App\\Tests\\Support\\": "tests/support"
+            "App\\Tests\\Unit\\": "tests/unit",
+            "App\\Tests\\Support\\": "tests/support",
+            "App\\Tests\\Architecture\\": "tests/architecture"
         }
     },
     "replace": {
@@ -71,6 +73,8 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.3",
+        "phpat/phpat": "^0.11.4",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.5.45",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",

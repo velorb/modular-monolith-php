@@ -25,9 +25,6 @@ class MoneyType extends Type
         return $value->amount;
     }
 
-    /**
-     * @param mixed $value
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Money
     {
         if ($value === null) {

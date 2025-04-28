@@ -47,10 +47,6 @@ abstract class DoctrineUuidType extends Type
 
     /**
      * Converts database value to PHP value.
-     *
-     * @param mixed $value
-     * @param AbstractPlatform $platform
-     * @return object|null
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?object
     {

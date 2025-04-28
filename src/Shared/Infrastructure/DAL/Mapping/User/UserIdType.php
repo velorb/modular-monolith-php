@@ -18,5 +18,4 @@ class UserIdType extends DoctrineUlidType
     {
         return 's-user-user_id';
     }
-
 }

@@ -15,7 +15,7 @@ class UserRoleAssignment
 
     public function __construct(
         private User $user, // @phpstan-ignore-line
-        private readonly UserRole $role
+        private readonly UserRole $role,
     ) {
         $this->userId = $user->getId();
     }

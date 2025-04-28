@@ -8,5 +8,4 @@ use App\Shared\Domain\Id\Ulid;
 
 final readonly class UserId extends Ulid
 {
-
 }

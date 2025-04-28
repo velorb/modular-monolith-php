@@ -14,13 +14,17 @@ ssh:
 	docker compose --env-file docker.env exec -u www-data php-fpm bash
 
 test:
-	@echo "$(GREEN)🛠️ [1/3] Statyczna analiza - PHPStan$(NC)"
+	@echo "$(GREEN)🛠️ [1/4] static analysis - phpstan$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'vendor/bin/phpstan analyse --configuration=phpstan.dist.neon'
 
-	@echo "$(GREEN)🛠️ [2/3] Testy jednostkowe (unit)$(NC)"
+	@echo "$(GREEN)🛠️ [2/4] static analysis - phpcsfixer$(NC)"
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'tools/vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --verbose --show-progress=dots --diff'
+
+
+	@echo "$(GREEN)🛠️ [3/4] unit tests$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'vendor/bin/phpunit --testsuite unit'
 
-	@echo "$(GREEN)🛠️ [3/3] Testy integracyjne (integration)$(NC)"
+	@echo "$(GREEN)🛠️ [4/3] integration tests$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'APP_RESET_DATABASE=1 vendor/bin/phpunit --testsuite integration'
 
 xdebug-enable:

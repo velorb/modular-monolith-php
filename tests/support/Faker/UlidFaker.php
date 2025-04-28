@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Support\Faker;
 
-use App\Shared\Domain\Id\Ulid;
-
 class UlidFaker
 {
     private const ENCODING = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';

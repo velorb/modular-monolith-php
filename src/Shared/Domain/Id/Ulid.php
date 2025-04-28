@@ -7,7 +7,7 @@ namespace App\Shared\Domain\Id;
 readonly class Ulid
 {
     public function __construct(
-        public string $value
+        public string $value,
     ) {
     }
 
@@ -16,7 +16,7 @@ readonly class Ulid
         return $this->value;
     }
 
-    public function equals(Ulid $id): bool
+    public function equals(self $id): bool
     {
         return $this->value === $id->value;
     }

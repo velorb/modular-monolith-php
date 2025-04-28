@@ -2,9 +2,9 @@
 
 use Symfony\Component\Dotenv\Dotenv;
 
-require dirname(__DIR__).'/vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
-(new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
+(new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
 
 if (isset($_ENV['APP_RESET_DATABASE']) && $_ENV['APP_RESET_DATABASE'] === '1') {
     passthru('php ' . __DIR__ . '/../bin/console doctrine:database:drop --force --if-exists --env=test');
@@ -14,5 +14,3 @@ if (isset($_ENV['APP_RESET_DATABASE']) && $_ENV['APP_RESET_DATABASE'] === '1') {
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
 }
-
-

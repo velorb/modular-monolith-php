@@ -18,3 +18,8 @@ docker.env
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+
+###> tools ###
+tools/vendor
+.php-cs-fixer.cache
+###< tools ###

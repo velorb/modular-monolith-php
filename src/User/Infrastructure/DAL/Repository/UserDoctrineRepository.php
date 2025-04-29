@@ -5,29 +5,17 @@ declare(strict_types=1);
 namespace App\User\Infrastructure\DAL\Repository;
 
 use App\Shared\Domain\User\UserId;
-use App\User\Core\User\IUserRepository;
+use App\Shared\Infrastructure\DAL\Repository\DoctrineEntityRepository;
+use App\User\Core\User\IUserEntityRepository;
 use App\User\Core\User\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<User>
+ * @extends DoctrineEntityRepository<User, UserId>
  */
-class UserDoctrineRepository extends ServiceEntityRepository implements IUserRepository
+class UserDoctrineRepository extends DoctrineEntityRepository implements IUserEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public static function getEntityClassName(): string
     {
-        parent::__construct($registry, User::class);
-    }
-
-    public function save(User $user): void
-    {
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
-    }
-
-    public function findById(UserId $userId): ?User
-    {
-        return $this->find($userId);
+        return User::class;
     }
 }

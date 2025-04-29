@@ -4,30 +4,18 @@ declare(strict_types=1);
 
 namespace App\MenuCatalog\Infrastructure\DAL\Repository;
 
+use App\MenuCatalog\Core\MenuItem\IMenuItemRepository;
 use App\MenuCatalog\Core\MenuItem\MenuItem;
-use App\MenuCatalog\Core\MenuItem\MenuItemRepositoryInterface;
 use App\Shared\Domain\MenuCatalog\MenuItemId;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Shared\Infrastructure\DAL\Repository\DoctrineEntityRepository;
 
 /**
- * @extends ServiceEntityRepository<MenuItem>
+ * @extends DoctrineEntityRepository<MenuItem, MenuItemId>
  */
-class MenuItemDoctrineRepository extends ServiceEntityRepository implements MenuItemRepositoryInterface
+class MenuItemDoctrineRepository extends DoctrineEntityRepository implements IMenuItemRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public static function getEntityClassName(): string
     {
-        parent::__construct($registry, MenuItem::class);
-    }
-
-    public function save(MenuItem $menuItem): void
-    {
-        $this->getEntityManager()->persist($menuItem);
-        $this->getEntityManager()->flush();
-    }
-
-    public function findById(MenuItemId $id): ?MenuItem
-    {
-        return $this->find($id);
+        return MenuItem::class;
     }
 }

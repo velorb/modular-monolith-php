@@ -26,6 +26,12 @@ test:
 	@echo "$(GREEN)🛠️ [4/3] integration tests$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'APP_RESET_DATABASE=1 vendor/bin/phpunit --testsuite integration --colors=always'
 
+swagger-validate:
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'npx swagger-cli validate docs/openapi/index.yaml'
+
+swagger-build:
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'npx swagger-cli bundle docs/openapi/index.yaml -o public/openapi.json -t json'
+
 xdebug-enable:
 	docker compose --env-file docker.env exec -u root php-fpm bash -c 'xdebug-enable'
 

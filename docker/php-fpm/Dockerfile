@@ -3,7 +3,9 @@ FROM php:8.3.20-fpm-alpine AS base
 RUN apk update && apk upgrade && apk add --no-cache \
     postgresql-dev \
     autoconf \
-    shadow
+    shadow \
+    nodejs \
+    npm
 
 RUN docker-php-ext-install pdo_pgsql
 

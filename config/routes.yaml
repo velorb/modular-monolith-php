@@ -1,5 +1,11 @@
-#controllers:
-#    resource:
-#        path: ../src/Shared/Infrastructure/Controller/
-#        namespace: App\Controller
-#    type: attribute
+menu_catalog__controllers:
+    resource:
+        path: ../src/MenuCatalog/Infrastructure/Api/Controller/
+        namespace: App\MenuCatalog\Infrastructure\Api\Controller
+    type: attribute
+
+shared__controllers:
+    resource:
+        path: ../src/Shared/Infrastructure/Api/Controller/
+        namespace: App\Shared\Infrastructure\Api\Controller
+    type: attribute

@@ -51,6 +51,6 @@ class MoneyType extends Type
 
     public function getName(): string
     {
-        return 's-money';
+        return 's__money';
     }
 }

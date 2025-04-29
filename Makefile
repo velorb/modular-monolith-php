@@ -20,12 +20,11 @@ test:
 	@echo "$(GREEN)🛠️ [2/4] static analysis - phpcsfixer$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'tools/vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --verbose --show-progress=dots --diff'
 
-
 	@echo "$(GREEN)🛠️ [3/4] unit tests$(NC)"
-	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'vendor/bin/phpunit --testsuite unit'
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'vendor/bin/phpunit --testsuite unit --colors=always'
 
 	@echo "$(GREEN)🛠️ [4/3] integration tests$(NC)"
-	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'APP_RESET_DATABASE=1 vendor/bin/phpunit --testsuite integration'
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'APP_RESET_DATABASE=1 vendor/bin/phpunit --testsuite integration --colors=always'
 
 xdebug-enable:
 	docker compose --env-file docker.env exec -u root php-fpm bash -c 'xdebug-enable'

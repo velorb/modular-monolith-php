@@ -13,6 +13,7 @@ return (new PhpCsFixer\Config())
         'blank_line_before_statement' => ['statements' => ['return']],
         'no_superfluous_phpdoc_tags' => ['allow_hidden_params' => true, 'remove_inheritdoc' => true],
         'no_unneeded_import_alias' => true,
+        'no_unused_imports' => true,
         'no_extra_blank_lines' => [
             'tokens' => [
                 'attribute',

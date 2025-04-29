@@ -15,4 +15,9 @@ final readonly class Money
     {
         return new self($amount);
     }
+
+    public function add(Money $toAdd): self
+    {
+        return new self($this->amount + $toAdd->amount);
+    }
 }

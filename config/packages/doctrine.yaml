@@ -10,6 +10,9 @@ doctrine:
         use_savepoints: true
         types:
             s-user-user_id: App\Shared\Infrastructure\DAL\Mapping\User\UserIdType
+            s-mc-menu_item_id: App\Shared\Infrastructure\DAL\Mapping\MenuItem\MenuItemIdType
+            s-vat_rate: App\Shared\Infrastructure\DAL\Mapping\VatRateType
+            s__money: App\Shared\Infrastructure\DAL\Mapping\MoneyType
             user-user_sso_id: App\User\Infrastructure\DAL\Mapping\UserSsoIdType
     orm:
         auto_generate_proxy_classes: true
@@ -21,12 +24,24 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
+            App\Shared:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Shared/Infrastructure/DAL/Mapping'
+                prefix: 'App\Shared\Domain'
+                alias: Shared
             App\User:
                 type: xml
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/User/Infrastructure/DAL/Mapping'
                 prefix: 'App\User\Core'
-                alias: App
+                alias: User
+            App\MenuCatalog:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/MenuCatalog/Infrastructure/DAL/Mapping'
+                prefix: 'App\MenuCatalog\Core'
+                alias: MenuCatalog
         controller_resolver:
             auto_mapping: false
 

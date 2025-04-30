@@ -9,6 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class IntegrationTestCase extends WebTestCase
 {
+    protected function setUp(): void
+    {
+        self::bootKernel();
+    }
+
     protected function getEntityManager(): EntityManagerInterface
     {
         return self::getServiceByClassName(EntityManagerInterface::class);

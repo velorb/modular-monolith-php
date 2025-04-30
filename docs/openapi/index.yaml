@@ -1,22 +1,66 @@
 openapi: 3.0.4
 info:
   title: API
-  description:
   version: X.X.X
 
 paths:
   /api/menu-item:
     get:
+      parameters:
+        - name: currentPage
+          in: query
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
       tags:
         - MenuCatalog
-      summary: Returns a list of users.
-      description: Optional extended description in CommonMark or HTML.
+      summary: Menu item collection
       responses:
-        "200": # status code
+        "200":
           description: A JSON array of user names
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
+                $ref: '#/components/schemas/MenuItemCollection'
+
+components:
+  schemas:
+    MenuItemCollectionElement:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        priceGross:
+          type: integer
+          description: Gross price in cents
+    MenuItemCollection:
+      allOf:
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/MenuItemCollectionElement'
+        - $ref: '#/components/schemas/PaginationResult'
+
+    PaginationResult:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            currentPage:
+              type: integer
+              example: 1
+              default: 1
+            pageSize:
+              type: integer
+              example: 10
+              default: 10
+            totalItems:
+              type: integer

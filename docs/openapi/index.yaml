@@ -50,8 +50,38 @@ paths:
       responses:
         "201":
           description: Resource created
-
-
+  /api/menu-item/{id}:
+    put:
+      tags:
+        - MenuCatalog
+      summary: Updates menu item
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: object
+                  properties:
+                    net:
+                      type: integer
+                      description: value in cents
+                    vat:
+                      type: integer
+                      description: value in basis points e.g. 8050 = 8.5%
+      responses:
+        "204":
+          description: Resource updated
 components:
   schemas:
     MenuItemCollectionElement:

@@ -8,7 +8,7 @@ use App\MenuCatalog\Core\Query\Internal\MenuItem\IMenuItemReadRepository;
 use App\Shared\Application\Bus\Query\IQueryHandler;
 use App\Shared\Application\ReadRepository\PaginatedCollectionDto;
 
-class GetMenuItemCollectionHandler implements IQueryHandler
+final class GetMenuItemCollectionHandler implements IQueryHandler
 {
     public function __construct(
         private readonly IMenuItemReadRepository $menuItemRepository,

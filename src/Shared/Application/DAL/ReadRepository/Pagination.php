@@ -6,7 +6,7 @@ namespace App\Shared\Application\DAL\ReadRepository;
 
 final readonly class Pagination
 {
-    public const int DEFAULT_PAGE_SIZE = 1;
+    public const int DEFAULT_PAGE_SIZE = 10;
     public const int DEFAULT_CURRENT_PAGE = 1;
 
     public int $pageSize;

@@ -9,7 +9,7 @@ use App\Shared\Domain\User\UserRole;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-final class User
+class User
 {
     /**
      * @var Collection<int, UserRoleAssignment>

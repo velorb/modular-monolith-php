@@ -25,3 +25,6 @@ services:
         App\Shared\Application\Bus\Query\IQueryHandler:
             tags:
                 - { name: messenger.message_handler, bus: query.bus }
+        App\Shared\Application\Bus\Command\ICommandHandler:
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }

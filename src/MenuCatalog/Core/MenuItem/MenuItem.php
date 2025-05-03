@@ -7,13 +7,19 @@ namespace App\MenuCatalog\Core\MenuItem;
 use App\Shared\Domain\MenuCatalog\MenuItemId;
 use App\Shared\Domain\Price;
 
-final class MenuItem
+class MenuItem
 {
     public function __construct(
         private MenuItemId $id,
         private string $name,
         private Price $price,
     ) {
+    }
+
+    public function update(string $name, Price $price): void
+    {
+        $this->name = $name;
+        $this->price = $price;
     }
 
     public function getId(): MenuItemId

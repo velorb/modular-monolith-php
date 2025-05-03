@@ -13,9 +13,9 @@ final class QueryBus implements IQueryBus
 {
     use HandleTrait;
 
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(MessageBusInterface $queryBus)
     {
-        $this->messageBus = $messageBus;
+        $this->messageBus = $queryBus;
     }
 
     public function ask(IQuery $query): mixed

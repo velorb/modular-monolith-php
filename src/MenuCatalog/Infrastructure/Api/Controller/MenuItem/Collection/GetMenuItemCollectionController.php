@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\MenuCatalog\Infrastructure\Api\Controller;
+namespace App\MenuCatalog\Infrastructure\Api\Controller\MenuItem\Collection;
 
 use App\MenuCatalog\Core\Query\Internal\MenuItem\Collection\GetMenuItemCollectionQuery;
+use App\MenuCatalog\Infrastructure\Api\Controller\CollectionRequestDto;
 use App\Shared\Application\Bus\Query\IQueryBus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -23,7 +23,7 @@ test:
 	@echo "$(GREEN)🛠️ [3/4] unit tests$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'vendor/bin/phpunit --testsuite unit --colors=always'
 
-	@echo "$(GREEN)🛠️ [4/3] integration tests$(NC)"
+	@echo "$(GREEN)🛠️ [4/4] integration tests$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'APP_RESET_DATABASE=1 vendor/bin/phpunit --testsuite integration --colors=always'
 
 swagger-validate:

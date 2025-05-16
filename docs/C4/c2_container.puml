@@ -1,0 +1,27 @@
+@startuml C2 Containers
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(customer, "Customer")
+Person(restaurantWorker, "Restaurant Worker")
+System_Ext(payment, "Payment", "Third‑party payment processor")
+System_Ext(delivery, "Delivery", "Third‑party shipping/tracking provider")
+System_Ext(sso, "SSO\nSingle Sing-On", "Authentication")
+
+System_Boundary(c1, "Food Ordering") {
+    Container(spa, "Single Page Application", "React")
+    Container(api, "Food ordering API", "PHP", "Backend")
+    ContainerDb(database, "Database", "PostgreSQL", "Restaurants, Orders")
+}
+
+Rel_L(customer, sso, "Uses", "HTTPS")
+Rel_L(restaurantWorker, sso, "Uses", "HTTPS")
+Rel(customer, spa, "Uses", "HTTPS")
+Rel(restaurantWorker, spa, "Uses", "HTTPS")
+Rel(spa, api, "Uses", "HTTPS")
+Rel_R(api, database, "Reads/Writes", "SQL")
+Rel_L(api, delivery, "Delegate delivery", "HTTPS")
+Rel_D(api, payment, "Delegate payment", "HTTPS")
+Rel(customer, payment, "Make payment", "HTTPS")
+
+LAYOUT_WITH_LEGEND()
+@enduml

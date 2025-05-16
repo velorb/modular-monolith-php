@@ -35,7 +35,8 @@ This diagram provides a high-level view of the system's internal architecture, d
 ## 🧪 Tests
 
 The project includes various levels of tests
-Run tests:
+
+- **Run tests**:
   ```bash
   make test
   ```

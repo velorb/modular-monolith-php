@@ -1,0 +1,11 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Restaurant\Core\MenuItem\MenuItem" table="restaurant_menu_item">
+        <id name="id" column="id" type="s__restaurant_menu_item_id"/>
+        <field name="name"/>
+        <embedded name="price" class="App\Shared\Domain\Price"/>
+    </entity>
+</doctrine-mapping>

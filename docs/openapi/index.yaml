@@ -16,7 +16,7 @@ paths:
           schema:
             type: integer
       tags:
-        - MenuCatalog
+        - Restaurant
       summary: Menu item collection
       responses:
         "200":
@@ -27,7 +27,7 @@ paths:
                 $ref: '#/components/schemas/MenuItemCollection'
     post:
       tags:
-        - MenuCatalog
+        - Restaurant
       summary: Create menu item
       requestBody:
         required: true
@@ -53,7 +53,7 @@ paths:
   /api/menu-item/{id}:
     put:
       tags:
-        - MenuCatalog
+        - Restaurant
       summary: Updates menu item
       parameters:
         - name: id

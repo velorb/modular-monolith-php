@@ -9,6 +9,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    App\MenuCatalog\Core\Query\Internal\MenuItem\IMenuItemReadRepository:
+    App\Restaurant\Core\Query\Internal\MenuItem\IMenuItemReadRepository:
         public: true
-        alias: 'App\MenuCatalog\Infrastructure\DAL\ReadRepository\MenuItemDoctrineReadRepository'
+        alias: 'App\Restaurant\Infrastructure\DAL\ReadRepository\MenuItemDoctrineReadRepository'

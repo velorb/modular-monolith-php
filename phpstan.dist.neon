@@ -7,7 +7,7 @@ services:
         tags:
             - phpat.test
     -
-        class: App\Tests\Architecture\MenuCatalogArchitectureTest
+        class: App\Tests\Architecture\RestaurantArchitectureTest
         tags:
             - phpat.test
 parameters:

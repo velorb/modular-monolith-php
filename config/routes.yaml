@@ -1,7 +1,7 @@
-menu_catalog__controllers:
+restaurant__controllers:
     resource:
-        path: ../src/MenuCatalog/Infrastructure/Api/Controller/
-        namespace: App\MenuCatalog\Infrastructure\Api\Controller
+        path: ../src/Restaurant/Infrastructure/Api/Controller/
+        namespace: App\Restaurant\Infrastructure\Api\Controller
     type: attribute
 
 shared__controllers:

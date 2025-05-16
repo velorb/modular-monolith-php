@@ -10,7 +10,7 @@ doctrine:
         use_savepoints: true
         types:
             s-user-user_id: App\Shared\Infrastructure\DAL\Mapping\User\UserIdType
-            s-mc-menu_item_id: App\Shared\Infrastructure\DAL\Mapping\MenuItem\MenuItemIdType
+            s__restaurant_menu_item_id: App\Shared\Infrastructure\DAL\Mapping\MenuItem\MenuItemIdType
             s-vat_rate: App\Shared\Infrastructure\DAL\Mapping\VatRateType
             s__money: App\Shared\Infrastructure\DAL\Mapping\MoneyType
             user-user_sso_id: App\User\Infrastructure\DAL\Mapping\UserSsoIdType
@@ -36,12 +36,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Infrastructure/DAL/Mapping'
                 prefix: 'App\User\Core'
                 alias: User
-            App\MenuCatalog:
+            App\Restaurant:
                 type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/MenuCatalog/Infrastructure/DAL/Mapping'
-                prefix: 'App\MenuCatalog\Core'
-                alias: MenuCatalog
+                dir: '%kernel.project_dir%/src/Restaurant/Infrastructure/DAL/Mapping'
+                prefix: 'App\Restaurant\Core'
+                alias: Restaurant
         controller_resolver:
             auto_mapping: false
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\DAL\Mapping\MenuItem;
 
-use App\Shared\Domain\MenuCatalog\MenuItemId;
+use App\Shared\Domain\Restaurant\MenuItemId;
 use App\Shared\Infrastructure\DAL\Mapping\DoctrineUlidType;
 
 class MenuItemIdType extends DoctrineUlidType
@@ -16,6 +16,6 @@ class MenuItemIdType extends DoctrineUlidType
 
     public function getName(): string
     {
-        return 's-mc-menu_item_id';
+        return 's__restaurant_menu_item_id';
     }
 }

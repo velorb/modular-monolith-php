@@ -59,9 +59,4 @@ abstract class DoctrineUlidType extends Type
 
         return new $className($value);
     }
-
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        return true;
-    }
 }

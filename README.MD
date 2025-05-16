@@ -32,6 +32,12 @@ This diagram provides a high-level view of the system's internal architecture, d
 
 ![Container Diagram](./docs/C4/c2_container.svg)
 
+#### 🧱 C3: Component Diagram
+
+This diagram shows the internal parts of the Food Ordering API, how they work together, and how they connect to outside systems.
+
+![Component Diagram](./docs/C4/c3_component.svg)
+
 ## 🧪 Tests
 
 The project includes various levels of tests

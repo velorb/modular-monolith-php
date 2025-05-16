@@ -1,16 +1,18 @@
-@startuml C2 Containers
+@startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 Person(customer, "Customer")
 Person(restaurantWorker, "Restaurant Worker")
 System_Ext(payment, "Payment", "Third‑party payment processor")
 System_Ext(delivery, "Delivery", "Third‑party shipping/tracking provider")
-System_Ext(sso, "SSO\nSingle Sing-On", "Authentication")
+System_Ext(sso, "SSO\nSingle Sign-On", "Authentication")
 
 System_Boundary(c1, "Food Ordering") {
     Container(spa, "Single Page Application", "React")
-    Container(api, "Food ordering API", "PHP", "Backend")
-    ContainerDb(database, "Database", "PostgreSQL", "Restaurants, Orders")
+    Container(api, "Food ordering API", "PHP", "Modular Monolith")
+    ContainerQueue("externalIntegrationEventQueue", "External Integration Event Queue", "Rabbit" ,"SSO events")
+    ContainerDb(database, "Database", "PostgreSQL", "Modules database")
+    ContainerDb(redis, "Cache", "Redis", "Doctrine cache, Lock, other...")
 }
 
 Rel_L(customer, sso, "Uses", "HTTPS")
@@ -18,10 +20,12 @@ Rel_L(restaurantWorker, sso, "Uses", "HTTPS")
 Rel(customer, spa, "Uses", "HTTPS")
 Rel(restaurantWorker, spa, "Uses", "HTTPS")
 Rel(spa, api, "Uses", "HTTPS")
-Rel_R(api, database, "Reads/Writes", "SQL")
-Rel_L(api, delivery, "Delegate delivery", "HTTPS")
-Rel_D(api, payment, "Delegate payment", "HTTPS")
-Rel(customer, payment, "Make payment", "HTTPS")
+Rel(api, database, "Reads / Writes", "SQL")
+Rel(api, redis, "Reads / Writes")
+Rel(api, delivery, "Delegates delivery", "HTTPS")
+Rel(api, payment, "Delegates payment", "HTTPS")
+Rel(api, externalIntegrationEventQueue, "pub / sub external integration event")
+Rel(customer, payment, "Makes payment", "HTTPS")
 
 LAYOUT_WITH_LEGEND()
 @enduml

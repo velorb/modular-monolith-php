@@ -10,6 +10,7 @@ RUN apk update && apk upgrade && apk add --no-cache \
 RUN docker-php-ext-install pdo_pgsql
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+WORKDIR /var/www/html/app
 
 FROM base AS dev
 

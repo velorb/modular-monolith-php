@@ -7,7 +7,10 @@ RUN apk update && apk upgrade && apk add --no-cache \
     nodejs \
     npm
 
-RUN docker-php-ext-install pdo_pgsql
+COPY --from=ghcr.io/mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
+RUN docker-php-ext-install pdo_pgsql && \
+    install-php-extensions redis
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 WORKDIR /var/www/html/app

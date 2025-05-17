@@ -46,3 +46,7 @@ services:
       start_period: 60s
     ports:
       - "5433:5432"
+
+  redis:
+    image: redis:8.0
+    command: ["redis-server", "--requirepass", "password"]

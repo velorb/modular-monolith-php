@@ -28,3 +28,4 @@ services:
         App\Shared\Application\Bus\Command\ICommandHandler:
             tags:
                 - { name: messenger.message_handler, bus: command.bus }
+    Psr\Cache\CacheItemPoolInterface $systemCache: '@cache.system'

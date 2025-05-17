@@ -13,6 +13,9 @@ build-php:
 ssh:
 	docker compose --env-file docker.env exec -u www-data php-fpm bash
 
+ssh-redis:
+	docker compose --env-file docker.env exec -u root redis bash
+
 test:
 	@echo "$(GREEN)🛠️ [1/4] static analysis - phpstan$(NC)"
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'vendor/bin/phpstan analyse --configuration=phpstan.dist.neon'

@@ -11,7 +11,7 @@ class NotFoundException extends ApplicationException
      * @psalm-assert !null $entity
      * @throws NotFoundException
      */
-    public static function throwIfNull(mixed $entity, string $message): void
+    public static function throwIfNull(?object $entity, string $message): void
     {
         if ($entity === null) {
             throw new NotFoundException($message);

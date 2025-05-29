@@ -29,7 +29,7 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
             UserIdOM::random(),
             UserSsoIdOM::random(),
             'username',
-            [UserRole::ADMIN, UserRole::USER],
+            [UserRole::ADMIN, UserRole::CYCLIST],
         );
         $this->userRepository->save($user);
         $this->clearEntityManager();
@@ -39,6 +39,6 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
         $this->assertEquals($user->getId(), $userFromDb->getId());
         $this->assertTrue($user->getSsoId()->equals($userFromDb->getSsoId()));
         $this->assertEquals($user->getUsername(), $userFromDb->getUsername());
-        $this->assertEquals([UserRole::ADMIN, UserRole::USER], $user->getRoles());
+        $this->assertEquals([UserRole::ADMIN, UserRole::CYCLIST], $user->getRoles());
     }
 }

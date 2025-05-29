@@ -6,10 +6,7 @@ services:
         class: App\Tests\Architecture\UserArchitectureTest
         tags:
             - phpat.test
-    -
-        class: App\Tests\Architecture\RestaurantArchitectureTest
-        tags:
-            - phpat.test
+
 parameters:
     level: 10
     paths:

@@ -6,6 +6,6 @@ namespace App\Shared\Domain\User;
 
 enum UserRole: string
 {
-    case USER = 'ROLE_USER';
-    case ADMIN = 'ROLE_ADMIN';
+    case CYCLIST = 'ROLE_CYCLIST';
+    case ADMIN = 'ROLE_BACKOFFICE_ADMIN';
 }

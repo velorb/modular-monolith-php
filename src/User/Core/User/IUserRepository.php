@@ -10,6 +10,9 @@ use App\Shared\Domain\User\UserId;
 /**
  * @extends IEntityRepository<User, UserId>
  */
-interface IUserEntityRepository extends IEntityRepository
+interface IUserRepository extends IEntityRepository
 {
+    public function findBySsoId(UserSsoId $ssoId): ?User;
+
+    public function findByUsername(string $username): ?User;
 }

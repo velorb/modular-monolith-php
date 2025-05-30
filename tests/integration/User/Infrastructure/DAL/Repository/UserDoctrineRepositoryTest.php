@@ -6,8 +6,9 @@ namespace App\Tests\Integration\User\Infrastructure\DAL\Repository;
 
 use App\Shared\Domain\User\UserRole;
 use App\Tests\Support\IntegrationTestCase;
+use App\Tests\Support\ObjectMother\Shared\Domain\EmailOM;
 use App\Tests\Support\ObjectMother\Shared\Domain\User\UserIdOM;
-use App\Tests\Support\ObjectMother\User\Core\User\UserSsoIdOM;
+use App\Tests\Support\ObjectMother\Shared\Domain\User\UserSsoIdOM;
 use App\User\Core\User\User;
 use App\User\Infrastructure\DAL\Repository\UserDoctrineRepository;
 use PHPUnit\Framework\Attributes\Test;
@@ -29,7 +30,10 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
             UserIdOM::random(),
             UserSsoIdOM::random(),
             'username',
+            EmailOM::random(),
             [UserRole::ADMIN, UserRole::CYCLIST],
+            'John',
+            'Doe'
         );
         $this->userRepository->save($user);
         $this->clearEntityManager();
@@ -40,5 +44,8 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
         $this->assertTrue($user->getSsoId()->equals($userFromDb->getSsoId()));
         $this->assertEquals($user->getUsername(), $userFromDb->getUsername());
         $this->assertEquals([UserRole::ADMIN, UserRole::CYCLIST], $user->getRoles());
+        $this->assertEquals($user->getEmail(), $userFromDb->getEmail());
+        $this->assertEquals($user->getFirstName(), $userFromDb->getFirstName());
+        $this->assertEquals($user->getLastName(), $userFromDb->getLastName());
     }
 }

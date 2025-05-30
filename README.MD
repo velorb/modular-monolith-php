@@ -1,6 +1,8 @@
-# 🍽️ Food Ordering – Food Ordering System
+# 🚲 Bikeo – City Bike Rental System
 
-**Food Ordering** is a web-based application that enables customers to browse restaurant menus, place orders, make payments, and track deliveries. Restaurant staff can manage menus and handle orders. The system integrates with external services for payments, deliveries, and authentication.
+**Bikeo** is a web-based application that allows cyclists to browse available city bikes, make reservations, rent bikes, and manage their accounts and rental history.
+
+System operators can manage the bike fleet, track bike locations, and handle maintenance. The system integrates with external services for payments, authentication, and bike tracking.
 
 ---
 

@@ -24,6 +24,15 @@ class IntegrationTestCase extends WebTestCase
         $this->getEntityManager()->clear();
     }
 
+    protected function saveEntities(object ...$entities): void
+    {
+        $entityManager = $this->getEntityManager();
+        foreach ($entities as $entity) {
+            $entityManager->persist($entity);
+        }
+        $entityManager->flush();
+    }
+
     /**
      * @template T of object
      * @param class-string<T> $className

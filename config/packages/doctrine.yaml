@@ -12,6 +12,7 @@ doctrine:
             s-user-user_id: App\Shared\Infrastructure\DAL\Mapping\User\UserIdType
             s-vat_rate: App\Shared\Infrastructure\DAL\Mapping\VatRateType
             s__money: App\Shared\Infrastructure\DAL\Mapping\MoneyType
+            s__email: App\Shared\Infrastructure\DAL\Mapping\EmailType
             user-user_sso_id: App\User\Infrastructure\DAL\Mapping\UserSsoIdType
     orm:
         auto_generate_proxy_classes: true

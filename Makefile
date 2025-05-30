@@ -27,6 +27,8 @@ test:
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'vendor/bin/phpunit --testsuite unit --colors=always'
 
 	@echo "$(GREEN)🛠️ [4/4] integration tests$(NC)"
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console doctrine:cache:clear-m --env=test'
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console cache:clear --env=test'
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'APP_RESET_DATABASE=1 vendor/bin/phpunit --testsuite integration --colors=always'
 
 swagger-validate:
@@ -34,6 +36,14 @@ swagger-validate:
 
 swagger-build:
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'npx swagger-cli bundle docs/openapi/index.yaml -o public/openapi.json -t json'
+
+run-migrations:
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console doctrine:migrations:migrate --no-interaction'
+
+migration:
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console doctrine:cache:clear-m'
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console cache:clear'
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console make:migration --no-interaction'
 
 xdebug-enable:
 	docker compose --env-file docker.env exec -u root php-fpm bash -c 'xdebug-enable'

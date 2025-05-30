@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\User\Core\User;
 
+use App\Shared\Domain\AggregateRoot;
+use App\Shared\Domain\Email;
 use App\Shared\Domain\User\UserId;
 use App\Shared\Domain\User\UserRole;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class User
+class User extends AggregateRoot
 {
     /**
      * @var Collection<int, UserRoleAssignment>
@@ -20,10 +22,13 @@ class User
      * @param UserRole[] $roles
      */
     private function __construct(
-        public UserId $id,
-        public UserSsoId $ssoId,
-        public string $username,
+        private UserId $id,
+        private UserSsoId $ssoId,
+        private string $username,
+        private Email $email,
         array $roles,
+        private string $firstName,
+        private string $lastName,
     ) {
         $this->roles = new ArrayCollection(
             array_map(
@@ -40,9 +45,12 @@ class User
         UserId $userId,
         UserSsoId $userSsoId,
         string $username,
+        Email $email,
         array $roles,
+        string $firstName,
+        string $lastName
     ): self {
-        return new self($userId, $userSsoId, $username, $roles);
+        return new self($userId, $userSsoId, $username, $email, $roles, $firstName, $lastName);
     }
 
     public function getId(): UserId
@@ -66,5 +74,20 @@ class User
     public function getRoles(): array
     {
         return $this->roles->map(fn (UserRoleAssignment $role) => $role->getRole())->toArray();
+    }
+
+    public function getEmail(): Email
+    {
+        return $this->email;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
     }
 }

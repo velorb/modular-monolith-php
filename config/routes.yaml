@@ -3,3 +3,9 @@ shared__controllers:
         path: ../src/Shared/Infrastructure/Api/Controller/
         namespace: App\Shared\Infrastructure\Api\Controller
     type: attribute
+
+user__controllers:
+    resource:
+        path: ../src/User/Infrastructure/Api/Controller/
+        namespace: App\User\Infrastructure\Api\Controller
+    type: attribute

@@ -5,9 +5,13 @@
 
     <entity name="App\User\Core\User\User" table="user_user">
         <id name="id" column="id" type="s-user-user_id"/>
-        <field name="ssoId" column="sso_id" type="user-user_sso_id"/>
-        <field name="username"/>
-        <one-to-many field="roles" target-entity="App\User\Core\User\UserRoleAssignment" mapped-by="user" fetch="EAGER" orphan-removal="true">
+        <field name="ssoId" column="sso_id" type="user-user_sso_id" unique="true"/>
+        <field name="username" unique="true"/>
+        <field name="email" column="email" type="s__email"/>
+        <field name="firstName" column="first_name"/>
+        <field name="lastName" column="last_name"/>
+        <one-to-many field="roles" target-entity="App\User\Core\User\UserRoleAssignment" mapped-by="user" fetch="EAGER"
+                     orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

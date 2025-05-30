@@ -2,24 +2,20 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
 '--- Actors & External Systems ---
-Person(customer, "Customer", "Browses menu, places orders, makes payments, and tracks deliveries")
-Person(restaurantWorker, "Restaurant Worker", "Manages restaurant and handles orders")
+Person(cyclist, "Cyclist", "Person who rents a bike")
+Person(admin, "Admin", "Company worker")
 System_Ext(payment, "Payment", "Third‑party payment processor")
-System_Ext(delivery, "Delivery", "Third‑party shipping/tracking provider")
 System_Ext(sso, "SSO\nSingle Sign-On", "Authentication")
-
-System(app, "Food Ordering", "Resturant managing\nOrderding ")
+System(app, "Bikeo", "Platform for city bike rentals")
 
 '--- Interactions ---
-Rel(customer, app, "browses menu,\nplaces order")
-Rel(customer, payment, "makes payment")
-Rel(customer, delivery, "tracks delivery")
-Rel_L(customer, sso, "authenticates")
-Rel_L(restaurantWorker, sso, "authenticates")
+Rel(cyclist, app, "rents bike")
+Rel(cyclist, payment, "makes payment")
+Rel_L(cyclist, sso, "authenticates")
+Rel_L(admin, sso, "authenticates")
 
-Rel(restaurantWorker, app, "creates menu,\nmanages restaurant,\n handles order")
+Rel(admin, app, "manages bikes fleet, rentals, cyclist")
 Rel(app, payment, "delegates payment")
-Rel(app, delivery, "delegates delivery")
 
 LAYOUT_WITH_LEGEND()
 @enduml

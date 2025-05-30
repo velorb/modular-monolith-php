@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\DAL\Mapping;
 
-use App\Shared\Domain\IIntegerVO;
+use App\Shared\Domain\IStringVO;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
 /**
- * @template T of IIntegerVO
+ * @template T of IStringVO
  */
-abstract class IntegerType extends Type
+abstract class StringType extends Type
 {
     public function getSQLDeclaration(array $column, AbstractPlatform $platform)
     {
-        return $platform->getIntegerTypeDeclarationSQL($column);
+        return $platform->getStringTypeDeclarationSQL($column);
     }
 
     /**
@@ -25,18 +25,18 @@ abstract class IntegerType extends Type
 
     abstract public function getName(): string;
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?int
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if ($value === null) {
             return null;
         }
 
-        if ($value instanceof IIntegerVO) {
-            return $value->toInt();
+        if ($value instanceof IStringVO) {
+            return $value->value();
         }
 
         throw new \InvalidArgumentException(
-            sprintf('Expected instance of %s, got %s', IIntegerVO::class, get_debug_type($value))
+            sprintf('Expected instance of %s, got %s', IStringVO::class, get_debug_type($value))
         );
     }
 
@@ -50,12 +50,12 @@ abstract class IntegerType extends Type
         }
 
         $className = $this->getValueObjectClassName();
-        if ($value instanceof IIntegerVO) {
+        if ($value instanceof IStringVO) {
             return $value;
         }
 
-        if (is_int($value)) {
-            return $className::fromInt($value);
+        if (is_string($value)) {
+            return $className::fromString($value);
         }
 
         throw new \InvalidArgumentException(

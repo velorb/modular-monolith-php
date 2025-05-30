@@ -1,44 +1,43 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-System_Boundary(c1, "Food Ordering System") {
-    Container(spa, "Single Page Application", "React")
-    Boundary(foodOrderingApi, "Food Ordering API") {
-        Component(restaurant, "Restaurant", "PHP Symfony", CRUD\n2 layers module)
-        Component(order, "Order", "PHP Symfony", "DDD\n3 layers module")
-        Component(user, "User", "PHP Symfony", "CRUD\n2 layers module")
+System_Boundary(c1, "Bikeo - Bike Rental Platform") {
+    Container(spa, "Single Page Application", "Js, React")
+    Boundary(bikeoApi, "Bikeo API") {
+        Component(paymentInternal, "Payment", "2 layers", "Handles payment processing logic and integration with external payment providers.\nGeneric Subdomain.")
+        Component(user, "User", "2 layers", "Manages user profiles and cyclist verification. Integration with external SSO provider.\nSupporting subdomain.")
+        Component(fleetManagement, "Fleet Management", "2 layers", "Manages bike fleet.\nSupporting Subdomain.")
+        Component(wallet, "Wallet", "Domain Driven Design", "Manages user balances and transaction history.\nGeneric subdomain.")
+        Component(rentals, "Rentals", "Domain Driven Design", "Handles bike reservations and rentals.\nCore Domain.")
         ComponentQueue(integrationEventBus, "Module Integration Events Bus", "In memory")
     }
-    ComponentQueue(externalIntegrationEventQueue, "External Integration Event Queue", "Rabbit", "SSO events")
-    ComponentDb(database, "Database", "PostgreSql", "Each module has own tables with prefix: order_*, user_*, ")
+    ComponentQueue(externalIntegrationEventQueue, "Queue", "Rabbit", "Module IE,\n External IE,\n Async Pub\Priv Commands\n")
+    ComponentDb(database, "Database", "PostgreSql", "Each module has own tables with prefix: wallet_*, user_*, ")
     ComponentDb(cache, "Cache", "Redis")
-
 }
-System_Ext(delivery, "Delivery")
 System_Ext(sso, "SSO\nSingle Sign-On", "Authentication")
 System_Ext(payment, "Payment")
 
-Rel(spa, restaurant, "Uses", "HTTPS")
-Rel(spa, order, "Uses", "HTTPS")
-Rel(spa, user, "Uses", "HTTPS")
+Rel(spa, bikeoApi, "Uses", "HTTPS")
 
 Rel(spa, sso, "Authenticates with", "HTTPS/OAuth2")
 Rel(sso, spa, "Returns auth token", "HTTPS/OAuth2")
 
-Rel(foodOrderingApi, cache, "Reads / Writes")
+Rel(bikeoApi, cache, "Reads / Writes")
 
-Rel(order, integrationEventBus, "pub / sub module integration event")
+Rel(wallet, integrationEventBus, "pub / sub module integration event")
 Rel(user, integrationEventBus, "pub / sub module integration event")
-Rel(restaurant, integrationEventBus, "pub / sub module integration event")
+Rel(fleetManagement, integrationEventBus, "pub / sub module integration event")
+Rel(rentals, integrationEventBus, "pub / sub module integration event")
+Rel(paymentInternal, integrationEventBus, "pub / sub module integration event")
 
-Rel(foodOrderingApi, externalIntegrationEventQueue, "Publishes / Subscribes")
+Rel(bikeoApi, externalIntegrationEventQueue, "Publishes / Subscribes")
 Rel(sso, externalIntegrationEventQueue, "Publishes event to")
+Rel_U(payment, externalIntegrationEventQueue, "Publishes event to")
 
-Rel(foodOrderingApi, database, "Stores / Retrieves")
+Rel(bikeoApi, database, "Stores / Retrieves")
 
-Rel(order, delivery, "Uses", "HTTPS")
-Rel(order, payment, "Uses", "HTTPS")
-Rel_R(order, restaurant, "Uses", "Direct method invocation\npublic command / query")
+Rel(paymentInternal, payment, "Uses", "HTTPS")
 
 
 LAYOUT_WITH_LEGEND()

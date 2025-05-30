@@ -6,7 +6,7 @@ namespace App\Shared\Domain;
 
 use App\Shared\Domain\Exception\DomainException;
 
-final class VatRate implements IntegerTypeVOInterface
+final class VatRate implements IIntegerVO
 {
     private const int HUNDRED_PERCENT_IN_BP = 10_000;
 

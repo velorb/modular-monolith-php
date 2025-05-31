@@ -13,7 +13,7 @@ use Doctrine\DBAL\Types\Type;
  */
 abstract class IntegerType extends Type
 {
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getIntegerTypeDeclarationSQL($column);
     }

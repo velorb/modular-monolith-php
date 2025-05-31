@@ -10,8 +10,6 @@ use Doctrine\DBAL\Types\Type;
 
 abstract class DoctrineUuidType extends Type
 {
-    private const int UUID_LENGTH = 36;
-
     /**
      * Returns the fully qualified class name of the value object.
      */
@@ -24,10 +22,7 @@ abstract class DoctrineUuidType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return $platform->getStringTypeDeclarationSQL([
-            'length' => self::UUID_LENGTH,
-            'fixed' => true,
-        ]);
+        return $platform->getStringTypeDeclarationSQL($column);
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
@@ -60,5 +55,10 @@ abstract class DoctrineUuidType extends Type
         }
 
         return new $className($value);
+    }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
     }
 }

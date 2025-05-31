@@ -10,8 +10,6 @@ use Doctrine\DBAL\Types\Type;
 
 abstract class DoctrineUlidType extends Type
 {
-    private const int ULID_LENGTH = 26;
-
     /**
      * Returns the fully qualified class name of the value object.
      */
@@ -24,10 +22,7 @@ abstract class DoctrineUlidType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return $platform->getStringTypeDeclarationSQL([
-            'length' => self::ULID_LENGTH,
-            'fixed' => true,
-        ]);
+        return $platform->getStringTypeDeclarationSQL($column);
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string

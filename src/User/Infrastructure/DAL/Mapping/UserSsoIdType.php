@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\DAL\Mapping\User;
+namespace App\User\Infrastructure\DAL\Mapping;
 
-use App\Shared\Domain\User\UserSsoId;
 use App\Shared\Infrastructure\DAL\Mapping\DoctrineUuidType;
+use App\User\Core\User\UserSsoId;
 
 class UserSsoIdType extends DoctrineUuidType
 {
@@ -16,6 +16,6 @@ class UserSsoIdType extends DoctrineUuidType
 
     public function getName(): string
     {
-        return 's__user_sso_id';
+        return 's__user__user_sso_id';
     }
 }

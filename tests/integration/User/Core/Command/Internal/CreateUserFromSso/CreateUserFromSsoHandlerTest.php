@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Integration\User\Core\Command\Internal\CreateUserFromSso;
 
 use App\Shared\Application\Exception\ValidationFailedException;
+use App\Shared\Domain\User\UserId;
 use App\Shared\Domain\User\UserRole;
 use App\Tests\Support\IntegrationTestCase;
 use App\Tests\Support\ObjectMother\Shared\Domain\EmailOM;
@@ -63,9 +64,10 @@ class CreateUserFromSsoHandlerTest extends IntegrationTestCase
         $this->handler->__invoke($command);
         $this->clearEntityManager();
 
-        $user = $this->userRepository->findBySsoId($command->ssoId);
+        $user = $this->userRepository->findById(UserId::fromUuid($command->ssoId));
         $this->assertNotNull($user);
         $this->assertEquals($command->ssoId, $user->getSsoId());
+        $this->assertEquals($command->ssoId->value, $user->getId()->value);
         $this->assertEquals($command->username, $user->getUsername());
         $this->assertEquals($command->email, $user->getEmail());
         $this->assertEqualsCanonicalizing($command->roles, $user->getRoles());

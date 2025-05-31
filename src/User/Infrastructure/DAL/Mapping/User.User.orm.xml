@@ -4,8 +4,8 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="App\User\Core\User\User" table="user_user">
-        <id name="id" column="id" type="user__user_id"/>
-        <field name="ssoId" column="sso_id" type="s__user_sso_id" unique="true"/>
+        <id name="id" column="id" type="s__user__user_id" length="36"/>
+        <field name="ssoId" column="sso_id" type="s__user__user_sso_id" unique="true" length="36"/>
         <field name="username" unique="true"/>
         <field name="email" column="email" type="s__email"/>
         <field name="firstName" column="first_name"/>

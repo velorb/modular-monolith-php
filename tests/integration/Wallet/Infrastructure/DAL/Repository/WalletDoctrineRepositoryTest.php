@@ -6,7 +6,7 @@ namespace App\Tests\Integration\Wallet\Infrastructure\DAL\Repository;
 
 use App\Shared\Domain\Money;
 use App\Tests\Support\IntegrationTestCase;
-use App\Tests\Support\ObjectMother\Shared\Domain\User\UserSsoIdOM;
+use App\Tests\Support\ObjectMother\Shared\Domain\User\UserIdOM;
 use App\Tests\Support\ObjectMother\Wallet\Domain\Wallet\WalletOM;
 use App\Wallet\Domain\Wallet\Transaction\TransactionAuthor;
 use App\Wallet\Domain\Wallet\Transaction\TransactionDto;
@@ -34,7 +34,7 @@ class WalletDoctrineRepositoryTest extends IntegrationTestCase
         $this->assertNotEmpty($walletFromDb);
         $this->assertEquals($wallet->getId(), $walletFromDb->getId());
         $this->assertEquals($wallet->getBalance(), $walletFromDb->getBalance());
-        $this->assertTrue($wallet->getUserSsoId()->equals($walletFromDb->getUserSsoId()));
+        $this->assertTrue($wallet->getUserId()->equals($walletFromDb->getUserId()));
         $this->assertEquals(
             $wallet->getCreatedAt()->format('Y-m-d H:i:s'),
             $walletFromDb->getCreatedAt()->format('Y-m-d H:i:s')
@@ -50,9 +50,9 @@ class WalletDoctrineRepositoryTest extends IntegrationTestCase
     {
         $wallet = WalletOM::create();
         $clock = $this->getClock();
-        $userSsoId = UserSsoIdOM::random();
+        $userId = UserIdOM::random();
         $wallet->deposit(Money::fromCents(100_00), TransactionAuthor::createSystemAuthor(), $clock);
-        $wallet->withdraw(Money::fromCents(50_00), TransactionAuthor::createUserAuthor($userSsoId), $clock);
+        $wallet->withdraw(Money::fromCents(50_00), TransactionAuthor::createUserAuthor($userId), $clock);
         $this->walletRepository->save($wallet);
         $this->clearEntityManager();
         $walletFromDb = $this->walletRepository->findById($wallet->getId());
@@ -67,6 +67,6 @@ class WalletDoctrineRepositoryTest extends IntegrationTestCase
         /** @var TransactionDto $withdrawal */
         $withdrawal = array_find($transactions, fn (TransactionDto $tx) => $tx->type === TransactionType::WITHDRAWAL);
         $this->assertEquals(Money::fromCents(50_00), $withdrawal->amount);
-        $this->assertEquals(TransactionAuthor::createUserAuthor($userSsoId), $withdrawal->createdBy);
+        $this->assertEquals(TransactionAuthor::createUserAuthor($userId), $withdrawal->createdBy);
     }
 }

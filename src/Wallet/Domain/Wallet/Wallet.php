@@ -10,7 +10,7 @@ use App\Shared\Domain\Exception\DomainException;
 use App\Shared\Domain\IClock;
 use App\Shared\Domain\ModificationDatesTrait;
 use App\Shared\Domain\Money;
-use App\Shared\Domain\User\UserSsoId;
+use App\Shared\Domain\User\UserId;
 use App\Wallet\Domain\Wallet\Transaction\Transaction;
 use App\Wallet\Domain\Wallet\Transaction\TransactionAuthor;
 use App\Wallet\Domain\Wallet\Transaction\TransactionDto;
@@ -32,7 +32,7 @@ class Wallet extends AggregateRoot
 
     private function __construct(
         private WalletId $id,
-        private UserSsoId $userSsoId,
+        private UserId $userId,
         private Money $balance,
         IClock $clock
     ) {
@@ -42,9 +42,9 @@ class Wallet extends AggregateRoot
         $this->updatedAt = $now;
     }
 
-    public static function create(WalletId $walletId, UserSsoId $userSsoId, IClock $clock): self
+    public static function create(WalletId $walletId, UserId $userId, IClock $clock): self
     {
-        return new self($walletId, $userSsoId, Money::fromCents(0), $clock);
+        return new self($walletId, $userId, Money::fromCents(0), $clock);
     }
 
     public function deposit(Money $money, TransactionAuthor $author, IClock $clock): void
@@ -80,9 +80,9 @@ class Wallet extends AggregateRoot
         return $this->id;
     }
 
-    public function getUserSsoId(): UserSsoId
+    public function getUserId(): UserId
     {
-        return $this->userSsoId;
+        return $this->userId;
     }
 
     /**

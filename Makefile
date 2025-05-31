@@ -43,7 +43,7 @@ run-migrations:
 migration:
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console doctrine:cache:clear-m'
 	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console cache:clear'
-	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console make:migration --no-interaction'
+	docker compose --env-file docker.env exec -u www-data php-fpm bash -c 'bin/console make:migration'
 
 xdebug-enable:
 	docker compose --env-file docker.env exec -u root php-fpm bash -c 'xdebug-enable'

@@ -5,6 +5,6 @@
 
     <embeddable name="App\Wallet\Domain\Wallet\Transaction\TransactionAuthor">
         <field name="type"/>
-        <field name="id" column="author_id" type="s__user_sso_id" nullable="true"/>
+        <field name="id" column="author_id" type="s__user__user_id" nullable="true" length="36"/>
     </embeddable>
 </doctrine-mapping>

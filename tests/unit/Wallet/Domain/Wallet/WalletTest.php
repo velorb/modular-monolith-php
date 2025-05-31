@@ -6,7 +6,7 @@ namespace App\Tests\Unit\Wallet\Domain\Wallet;
 
 use App\Shared\Domain\Exception\DomainException;
 use App\Shared\Domain\Money;
-use App\Tests\Support\ObjectMother\Shared\Domain\User\UserSsoIdOM;
+use App\Tests\Support\ObjectMother\Shared\Domain\User\UserIdOM;
 use App\Tests\Support\ObjectMother\Wallet\Domain\Wallet\WalletIdOM;
 use App\Tests\Support\UnitTestCase;
 use App\Wallet\Domain\Wallet\Transaction\TransactionAuthor;
@@ -22,7 +22,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock(),
         );
 
@@ -35,7 +35,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock('2025-04-01T00:00:00'),
         );
         $this->assertEquals(new \DateTimeImmutable('2025-04-01T00:00:00'), $wallet->getCreatedAt());
@@ -55,7 +55,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock(),
         );
 
@@ -74,7 +74,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock(),
         );
         $wallet->deposit(
@@ -98,7 +98,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock(),
         );
 
@@ -130,7 +130,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock(),
         );
 
@@ -145,7 +145,7 @@ class WalletTest extends UnitTestCase
 
         $wallet->deposit(
             Money::fromCents(1),
-            TransactionAuthor::createUserAuthor(UserSsoIdOM::random()),
+            TransactionAuthor::createUserAuthor(UserIdOM::random()),
             $this->getClock(),
         );
     }
@@ -155,7 +155,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock(),
         );
         $wallet->deposit(
@@ -178,7 +178,7 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock('2025-04-01T00:00:00'),
         );
         $wallet->deposit(
@@ -186,7 +186,7 @@ class WalletTest extends UnitTestCase
             TransactionAuthor::createSystemAuthor(),
             $this->getClock('2025-04-01T12:00:00'),
         );
-        $userAuthor = TransactionAuthor::createUserAuthor(UserSsoIdOM::random());
+        $userAuthor = TransactionAuthor::createUserAuthor(UserIdOM::random());
         $wallet->withdraw(
             Money::fromCents(200),
             $userAuthor,
@@ -218,10 +218,10 @@ class WalletTest extends UnitTestCase
     {
         $wallet = Wallet::create(
             WalletIdOM::random(),
-            UserSsoIdOM::random(),
+            UserIdOM::random(),
             $this->getClock(),
         );
-        $userAuthor = TransactionAuthor::createUserAuthor(UserSsoIdOM::random());
+        $userAuthor = TransactionAuthor::createUserAuthor(UserIdOM::random());
 
         $wallet->deposit(
             Money::fromCents(500),

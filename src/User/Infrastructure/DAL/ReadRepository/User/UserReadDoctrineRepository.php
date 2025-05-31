@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\DAL\ReadRepository\User;
 
-use App\Shared\Domain\User\UserSsoId;
 use App\User\Core\Query\Internal\User\Dto\UserDto;
 use App\User\Core\Query\Internal\User\IUserReadRepository;
+use App\User\Core\User\UserSsoId;
 use Doctrine\DBAL\Connection;
 
 class UserReadDoctrineRepository implements IUserReadRepository

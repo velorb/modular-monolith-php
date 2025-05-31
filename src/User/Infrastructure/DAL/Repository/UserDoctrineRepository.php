@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\User\Infrastructure\DAL\Repository;
 
-use App\Shared\Domain\User\UserSsoId;
+use App\Shared\Domain\User\UserId;
 use App\Shared\Infrastructure\DAL\Repository\DoctrineEntityRepository;
 use App\User\Core\User\IUserRepository;
 use App\User\Core\User\User;
-use App\User\Core\User\UserId;
+use App\User\Core\User\UserSsoId;
 
 /**
  * @extends DoctrineEntityRepository<User, UserId>

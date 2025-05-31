@@ -4,8 +4,8 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="App\Wallet\Domain\Wallet\Wallet" table="wallet_wallet">
-        <id name="id" column="id" type="wallet__wallet_id"/>
-        <field name="userSsoId" column="user_sso_id" type="s__user_sso_id" unique="true"/>
+        <id name="id" column="id" type="wallet__wallet_id" length="26"/>
+        <field name="userId" column="user_id" type="s__user__user_id" unique="true" length="36"/>
         <field name="balance" column="balance" type="s__money"/>
         <field name="createdAt" column="createdAt" type="datetime_immutable"/>
         <field name="updatedAt" column="updatedAt" type="datetime_immutable"/>

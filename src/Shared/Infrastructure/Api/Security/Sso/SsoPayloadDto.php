@@ -6,7 +6,7 @@ namespace App\Shared\Infrastructure\Api\Security\Sso;
 
 use App\Shared\Domain\Email;
 use App\Shared\Domain\User\UserRole;
-use App\Shared\Domain\User\UserSsoId;
+use App\User\Core\User\UserSsoId;
 
 readonly class SsoPayloadDto
 {

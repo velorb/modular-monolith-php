@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Wallet\Domain\Wallet\Transaction;
 
-use App\Shared\Domain\User\UserSsoId;
+use App\Shared\Domain\User\UserId;
 
 readonly class TransactionAuthor
 {
     private function __construct(
         private TransactionAuthorType $type,
-        private ?UserSsoId $id,
+        private ?UserId $id,
     ) {
     }
 
-    public static function createUserAuthor(UserSsoId $id): self
+    public static function createUserAuthor(UserId $id): self
     {
         return new self(TransactionAuthorType::USER, $id);
     }
@@ -32,7 +32,7 @@ readonly class TransactionAuthor
         return $this->type === TransactionAuthorType::SYSTEM;
     }
 
-    public function getId(): ?UserSsoId
+    public function getId(): ?UserId
     {
         return $this->id;
     }

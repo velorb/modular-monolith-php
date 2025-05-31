@@ -16,3 +16,6 @@ services:
     App\Wallet\Domain\Wallet\IWalletRepository:
         alias: 'App\Wallet\Infrastructure\DAL\Repository\WalletDoctrineRepository'
         public: true
+
+    App\Tests\Support\Mock\Shared\Application\Bus\Event\EventBusMock: ~
+    App\Shared\Application\Bus\Event\IEventBus: '@App\Tests\Support\Mock\Shared\Application\Bus\Event\EventBusMock'

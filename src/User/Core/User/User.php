@@ -6,8 +6,10 @@ namespace App\User\Core\User;
 
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\Email;
+use App\Shared\Domain\IClock;
 use App\Shared\Domain\User\UserId;
 use App\Shared\Domain\User\UserRole;
+use App\User\Core\User\Event\UserCreated;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -29,6 +31,7 @@ class User extends AggregateRoot
         array $roles,
         private string $firstName,
         private string $lastName,
+        private IClock $clock,
     ) {
         $this->roles = new ArrayCollection(
             array_map(
@@ -36,6 +39,7 @@ class User extends AggregateRoot
                 $roles
             )
         );
+        $this->record(new UserCreated($this->id, $this->clock->now(), $this->email));
     }
 
     /**
@@ -48,9 +52,10 @@ class User extends AggregateRoot
         Email $email,
         array $roles,
         string $firstName,
-        string $lastName
+        string $lastName,
+        IClock $clock
     ): self {
-        return new self($userId, $userSsoId, $username, $email, $roles, $firstName, $lastName);
+        return new self($userId, $userSsoId, $username, $email, $roles, $firstName, $lastName, $clock);
     }
 
     public function getId(): UserId

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Support;
 
+use App\Tests\Support\Mock\Shared\Application\Bus\Event\EventBusMock;
 use App\Tests\Support\Mock\Shared\Domain\ClockMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -42,6 +43,11 @@ class IntegrationTestCase extends WebTestCase
     public static function getServiceByClassName(string $className)
     {
         return self::getContainer()->get($className); // @phpstan-ignore-line
+    }
+
+    protected function getEventBus(): EventBusMock
+    {
+        return $this->getServiceByClassName(EventBusMock::class);
     }
 
     protected function getClock(?string $now = null): ClockMock

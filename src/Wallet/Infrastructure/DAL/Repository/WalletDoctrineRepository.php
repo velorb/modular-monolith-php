@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Wallet\Infrastructure\DAL\Repository;
 
+use App\Shared\Domain\User\UserId;
 use App\Shared\Infrastructure\DAL\Repository\DoctrineEntityRepository;
 use App\Wallet\Domain\Wallet\IWalletRepository;
 use App\Wallet\Domain\Wallet\Wallet;
@@ -17,5 +18,10 @@ class WalletDoctrineRepository extends DoctrineEntityRepository implements IWall
     public static function getEntityClassName(): string
     {
         return Wallet::class;
+    }
+
+    public function findByUserId(UserId $userId): ?Wallet
+    {
+        return $this->findOneBy(['userId' => $userId]);
     }
 }

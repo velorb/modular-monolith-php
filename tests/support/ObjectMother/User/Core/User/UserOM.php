@@ -6,6 +6,7 @@ namespace App\Tests\Support\ObjectMother\User\Core\User;
 
 use App\Shared\Domain\Email;
 use App\Shared\Domain\User\UserRole;
+use App\Tests\Support\Mock\Shared\Domain\ClockMock;
 use App\Tests\Support\ObjectMother\Shared\Domain\EmailOM;
 use App\Tests\Support\ObjectMother\Shared\Domain\User\UserIdOM;
 use App\Tests\Support\ObjectMother\Shared\Domain\User\UserSsoIdOM;
@@ -23,7 +24,8 @@ class UserOM
         ?Email $email = null,
         ?string $firstName = null,
         ?string $lastName = null,
-        ?array $roles = null
+        ?array $roles = null,
+        ?ClockMock $clock = null,
     ): User {
         return User::createFromSso(
             UserIdOM::random(),
@@ -32,7 +34,8 @@ class UserOM
             $email ?? EmailOM::random(),
             $roles ?? [UserRole::CYCLIST],
             $firstName ?? 'John',
-            $lastName ?? 'Doe'
+            $lastName ?? 'Doe',
+            $clock ?? new ClockMock()
         );
     }
 }

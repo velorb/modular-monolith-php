@@ -33,7 +33,8 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
             EmailOM::random(),
             [UserRole::ADMIN, UserRole::CYCLIST],
             'John',
-            'Doe'
+            'Doe',
+            $this->getClock(),
         );
         $this->userRepository->save($user);
         $this->clearEntityManager();

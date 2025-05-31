@@ -20,6 +20,11 @@ readonly class Ulid
         $this->value = $value;
     }
 
+    public static function fromUlid(Ulid $new): static
+    {
+        return new static($new->value); //@phpstan-ignore-line
+    }
+
     public function __toString(): string
     {
         return $this->value;

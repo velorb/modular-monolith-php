@@ -34,6 +34,7 @@ class UserArchitectureTest
             ->excluding(
                 Selector::inNamespace('App\User'),
                 Selector::inNamespace('App\Shared'),
+                ArchitectureTest::moduleIntegrationEvents(),
             );
     }
 }

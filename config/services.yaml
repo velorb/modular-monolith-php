@@ -28,4 +28,7 @@ services:
         App\Shared\Application\Bus\Command\ICommandHandler:
             tags:
                 - { name: messenger.message_handler, bus: command.bus }
+        App\Shared\Application\Bus\Event\IEventHandler:
+            tags:
+                - { name: messenger.message_handler, bus: event.bus }
     Psr\Cache\CacheItemPoolInterface $systemCache: '@cache.system'

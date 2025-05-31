@@ -49,6 +49,7 @@ class WalletArchitectureTest
             ->excluding(
                 Selector::inNamespace('App\Wallet'),
                 Selector::inNamespace('App\Shared'),
+                ArchitectureTest::moduleIntegrationEvents(),
             );
     }
 }

@@ -6,6 +6,8 @@ namespace App\User\Core\Command\Internal\CreateUserFromSso;
 
 use App\Shared\Application\Bus\Command\ICommandHandler;
 use App\Shared\Application\Exception\ValidationFailedException;
+use App\Shared\Application\IDomainEventDispatcher;
+use App\Shared\Domain\IClock;
 use App\Shared\Domain\User\UserId;
 use App\User\Core\User\IUserRepository;
 use App\User\Core\User\User;
@@ -14,6 +16,8 @@ class CreateUserFromSsoHandler implements ICommandHandler
 {
     public function __construct(
         private readonly IUserRepository $userRepository,
+        private readonly IClock $clock,
+        private readonly IDomainEventDispatcher $dispatcher,
     ) {
     }
 
@@ -31,9 +35,11 @@ class CreateUserFromSsoHandler implements ICommandHandler
             $command->email,
             $command->roles,
             $command->firstName,
-            $command->lastName
+            $command->lastName,
+            $this->clock,
         );
 
         $this->userRepository->save($user);
+        $this->dispatcher->dispatch(...$user->pullEvents());
     }
 }

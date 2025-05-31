@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace App\Tests\Support;
 
+use App\Shared\Application\Bus\Event\IModuleIntegrationEvent;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PHPat\Selector\Selector;
 use PHPat\Selector\SelectorInterface;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 class ArchitectureTest
 {
+    public static function moduleIntegrationEvents(): SelectorInterface
+    {
+        return Selector::implements(IModuleIntegrationEvent::class);
+    }
+
     /**
      * @return SelectorInterface[]
      */
@@ -22,6 +29,7 @@ class ArchitectureTest
             [
                 Selector::classname(Collection::class),
                 Selector::classname(ArrayCollection::class),
+                Selector::classname(AsEventListener::class),
             ]
         );
     }

@@ -1,0 +1,19 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Wallet\Domain\Wallet\Transaction\Transaction" table="wallet_transaction">
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="amount" column="amount" type="s__money"/>
+        <embedded name="createdBy" class="App\Wallet\Domain\Wallet\Transaction\TransactionAuthor"
+                  column-prefix="created_by_"/>
+        <field name="createdAt" column="created_at" type="datetime_immutable"/>
+        <field name="type" column="type"/>
+        <many-to-one field="wallet" target-entity="App\Wallet\Domain\Wallet\Wallet" inversed-by="transactions">
+            <join-column name="wallet_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

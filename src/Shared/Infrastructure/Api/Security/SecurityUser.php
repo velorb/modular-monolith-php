@@ -7,7 +7,7 @@ namespace App\Shared\Infrastructure\Api\Security;
 use App\Shared\Application\RequestingUserDto;
 use App\Shared\Domain\Email;
 use App\Shared\Domain\User\UserRole;
-use App\User\Core\User\UserSsoId;
+use App\Shared\Domain\User\UserSsoId;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 readonly class SecurityUser implements UserInterface

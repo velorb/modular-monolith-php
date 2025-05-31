@@ -6,8 +6,8 @@ namespace App\User\Core\User;
 
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\Email;
-use App\Shared\Domain\User\UserId;
 use App\Shared\Domain\User\UserRole;
+use App\Shared\Domain\User\UserSsoId;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

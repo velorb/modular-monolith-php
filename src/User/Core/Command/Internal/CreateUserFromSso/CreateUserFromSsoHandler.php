@@ -7,9 +7,9 @@ namespace App\User\Core\Command\Internal\CreateUserFromSso;
 use App\Shared\Application\Bus\Command\ICommandHandler;
 use App\Shared\Application\Exception\ValidationFailedException;
 use App\Shared\Domain\Id\IUlidGenerator;
-use App\Shared\Domain\User\UserId;
 use App\User\Core\User\IUserRepository;
 use App\User\Core\User\User;
+use App\User\Core\User\UserId;
 
 class CreateUserFromSsoHandler implements ICommandHandler
 {

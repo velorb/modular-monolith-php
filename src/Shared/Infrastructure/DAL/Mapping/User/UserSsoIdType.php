@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\DAL\Mapping\User;
 
-use App\Shared\Domain\User\UserId;
-use App\Shared\Infrastructure\DAL\Mapping\DoctrineUlidType;
+use App\Shared\Domain\User\UserSsoId;
+use App\Shared\Infrastructure\DAL\Mapping\DoctrineUuidType;
 
-class UserIdType extends DoctrineUlidType
+class UserSsoIdType extends DoctrineUuidType
 {
     protected function getValueObjectClassName(): string
     {
-        return UserId::class;
+        return UserSsoId::class;
     }
 
     public function getName(): string
     {
-        return 's-user-user_id';
+        return 's__user_sso_id';
     }
 }

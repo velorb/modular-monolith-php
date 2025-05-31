@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\User\Core\User;
+namespace App\Shared\Domain\User;
 
 use App\Shared\Domain\Id\Uuid;
 

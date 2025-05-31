@@ -6,7 +6,10 @@ services:
         class: App\Tests\Architecture\UserArchitectureTest
         tags:
             - phpat.test
-
+    -
+        class: App\Tests\Architecture\WalletArchitectureTest
+        tags:
+            - phpat.test
 parameters:
     level: 10
     paths:

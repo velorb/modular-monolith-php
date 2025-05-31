@@ -9,11 +9,12 @@ doctrine:
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
         types:
-            s-user-user_id: App\Shared\Infrastructure\DAL\Mapping\User\UserIdType
+            user__user_id: App\User\Infrastructure\DAL\Mapping\UserIdType
             s-vat_rate: App\Shared\Infrastructure\DAL\Mapping\VatRateType
             s__money: App\Shared\Infrastructure\DAL\Mapping\MoneyType
             s__email: App\Shared\Infrastructure\DAL\Mapping\EmailType
-            user-user_sso_id: App\User\Infrastructure\DAL\Mapping\UserSsoIdType
+            s__user_sso_id: App\Shared\Infrastructure\DAL\Mapping\User\UserSsoIdType
+            wallet__wallet_id: App\Wallet\Infrastructure\DAL\Mapping\WalletIdType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -36,6 +37,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Infrastructure/DAL/Mapping'
                 prefix: 'App\User\Core'
                 alias: User
+            App\Wallet:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Wallet/Infrastructure/DAL/Mapping'
+                prefix: 'App\Wallet\Domain'
+                alias: Wallet
         controller_resolver:
             auto_mapping: false
         metadata_cache_driver:

@@ -11,3 +11,8 @@ services:
     cache.adapter.null:
         class: Symfony\Component\Cache\Adapter\NullAdapter
         arguments: [~]
+
+
+    App\Wallet\Domain\Wallet\IWalletRepository:
+        alias: 'App\Wallet\Infrastructure\DAL\Repository\WalletDoctrineRepository'
+        public: true

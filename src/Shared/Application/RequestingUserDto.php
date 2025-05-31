@@ -6,7 +6,7 @@ namespace App\Shared\Application;
 
 use App\Shared\Domain\Email;
 use App\Shared\Domain\User\UserRole;
-use App\User\Core\User\UserSsoId;
+use App\Shared\Domain\User\UserSsoId;
 
 readonly class RequestingUserDto
 {

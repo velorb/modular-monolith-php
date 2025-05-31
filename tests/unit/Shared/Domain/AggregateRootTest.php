@@ -6,6 +6,7 @@ namespace App\Tests\Unit\Shared\Domain;
 
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\DomainEvent;
+use App\Shared\Domain\Id\Ulid;
 use App\Tests\Support\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -33,7 +34,7 @@ class AggregateRootTest extends UnitTestCase
 
     private function getEvent(): DomainEvent
     {
-        return new class () extends DomainEvent {
+        return new readonly class (new Ulid('ulid'), new \DateTimeImmutable()) extends DomainEvent {
         };
     }
 }

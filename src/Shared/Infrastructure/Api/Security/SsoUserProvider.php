@@ -46,6 +46,10 @@ class SsoUserProvider implements UserProviderInterface, PayloadAwareUserProvider
     public function loadUserByIdentifierAndPayload(string $identifier, array $payload): UserInterface
     {
         $ssoPayload = $this->payloadFactory->createPayloadDto($payload);
+
+        /**
+         * @todo for simplicity - later move user creation to sso event in user module.
+         */
         $user = $this->userRepository->findBySsoId($ssoPayload->userSsoId);
         if ($user === null) {
             $this->commandBus->dispatch(

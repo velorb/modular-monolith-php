@@ -7,7 +7,6 @@ namespace App\User\Core\CyclistVerification;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\AggregateVersionTrait;
 use App\Shared\Domain\IClock;
-use App\Shared\Domain\ModificationDatesTrait;
 use App\Shared\Domain\Money;
 use App\Shared\Domain\User\UserId;
 use App\User\Core\CyclistVerification\Event\CyclistVerified;
@@ -15,7 +14,6 @@ use App\User\Core\CyclistVerification\Event\CyclistVerified;
 class CyclistVerificationProcess extends AggregateRoot
 {
     use AggregateVersionTrait;
-    use ModificationDatesTrait;
 
     private const int MINIMUM_WALLET_BALANCE_CENTS = 20_00;
 

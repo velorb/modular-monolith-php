@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Shared\Domain;
 
 /**
- * This is used for optimistic locking of aggregates.
+ * @TODO:
+ * * This is used for optimistic locking of aggregates. Add optimistic locking mechanism.
  */
 trait AggregateVersionTrait
 {

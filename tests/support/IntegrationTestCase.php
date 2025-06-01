@@ -52,6 +52,15 @@ class IntegrationTestCase extends WebTestCase
 
     protected function getClock(?string $now = null): ClockMock
     {
-        return new ClockMock(new \DateTimeImmutable($now ?? 'now'));
+        $clock = $this->getServiceByClassName(ClockMock::class);
+        $clock->setNow(new \DateTimeImmutable($now ?? 'now'));
+
+        return $clock;
+    }
+
+    protected function setTime(?string $now = null): void
+    {
+        $clock = $this->getServiceByClassName(ClockMock::class);
+        $clock->setNow(new \DateTimeImmutable($now ?? 'now'));
     }
 }

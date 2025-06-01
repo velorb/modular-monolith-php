@@ -19,3 +19,6 @@ services:
 
     App\Tests\Support\Mock\Shared\Application\Bus\Event\EventBusMock: ~
     App\Shared\Application\Bus\Event\IEventBus: '@App\Tests\Support\Mock\Shared\Application\Bus\Event\EventBusMock'
+
+    App\Tests\Support\Mock\Shared\Domain\ClockMock: ~
+    App\Shared\Domain\IClock: '@App\Tests\Support\Mock\Shared\Domain\ClockMock'

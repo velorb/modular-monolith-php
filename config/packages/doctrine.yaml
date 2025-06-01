@@ -13,6 +13,8 @@ doctrine:
             s__email: App\Shared\Infrastructure\DAL\Mapping\EmailType
             s__user__user_sso_id: App\User\Infrastructure\DAL\Mapping\UserSsoIdType
             wallet__wallet_id: App\Wallet\Infrastructure\DAL\Mapping\WalletIdType
+            user__cyclist_verification_process_id: App\User\Infrastructure\DAL\Mapping\CyclistVerificationProcessIdType
+            user__cyclist_verification_history_collection: App\User\Infrastructure\DAL\Mapping\CyclistVerificationHistoryCollectionType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true

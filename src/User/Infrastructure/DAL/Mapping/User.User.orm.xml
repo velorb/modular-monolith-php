@@ -16,5 +16,6 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+        <embedded name="address" class="App\Shared\Domain\Address" column-prefix="address_"/>
     </entity>
 </doctrine-mapping>

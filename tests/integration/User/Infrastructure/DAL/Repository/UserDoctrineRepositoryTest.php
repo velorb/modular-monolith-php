@@ -48,5 +48,6 @@ class UserDoctrineRepositoryTest extends IntegrationTestCase
         $this->assertEquals($user->getEmail(), $userFromDb->getEmail());
         $this->assertEquals($user->getFirstName(), $userFromDb->getFirstName());
         $this->assertEquals($user->getLastName(), $userFromDb->getLastName());
+        $this->assertEquals($user->getAddress(), $userFromDb->getAddress());
     }
 }

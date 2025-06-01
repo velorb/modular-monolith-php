@@ -35,4 +35,9 @@ final readonly class Money
     {
         return $this->amount <= $money->amount;
     }
+
+    public function isGreaterOrEqual(Money $money): bool
+    {
+        return $this->amount >= $money->amount;
+    }
 }

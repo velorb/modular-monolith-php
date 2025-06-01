@@ -11,7 +11,7 @@ abstract readonly class DomainEvent
 {
     public function __construct(
         public Ulid|Uuid $aggregateId,
-        public \DateTimeImmutable $occurredOn,
+        public \DateTimeImmutable $occurredAt,
     ) {
     }
 }

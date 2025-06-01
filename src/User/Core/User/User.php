@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\User\Core\User;
 
+use App\Shared\Domain\Address;
 use App\Shared\Domain\AggregateRoot;
 use App\Shared\Domain\Email;
 use App\Shared\Domain\IClock;
 use App\Shared\Domain\User\UserId;
 use App\Shared\Domain\User\UserRole;
+use App\User\Core\User\Event\UserAddressChanged;
 use App\User\Core\User\Event\UserCreated;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,6 +21,8 @@ class User extends AggregateRoot
      * @var Collection<int, UserRoleAssignment>
      */
     private Collection $roles;
+
+    private Address $address;
 
     /**
      * @param UserRole[] $roles
@@ -33,6 +37,7 @@ class User extends AggregateRoot
         private string $lastName,
         private IClock $clock,
     ) {
+        $this->address = Address::empty();
         $this->roles = new ArrayCollection(
             array_map(
                 fn (UserRole $role) => new UserRoleAssignment($this, $role),
@@ -56,6 +61,23 @@ class User extends AggregateRoot
         IClock $clock
     ): self {
         return new self($userId, $userSsoId, $username, $email, $roles, $firstName, $lastName, $clock);
+    }
+
+    public function changeAddress(Address $address, IClock $clock): void
+    {
+        if ($address->isEmpty()) {
+            throw new \InvalidArgumentException('Address cannot be empty.');
+        }
+        if ($this->address->equals($address)) {
+            return;
+        }
+        $this->address = $address;
+        $this->record(new UserAddressChanged($this->id, $clock->now(), $address));
+    }
+
+    public function isCyclist(): bool
+    {
+        return !empty(array_find($this->getRoles(), fn (UserRole $role) => $role === UserRole::CYCLIST));
     }
 
     public function getId(): UserId
@@ -94,5 +116,10 @@ class User extends AggregateRoot
     public function getLastName(): string
     {
         return $this->lastName;
+    }
+
+    public function getAddress(): Address
+    {
+        return $this->address;
     }
 }

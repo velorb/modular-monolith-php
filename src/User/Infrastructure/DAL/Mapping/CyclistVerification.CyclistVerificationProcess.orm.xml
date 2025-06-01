@@ -1,0 +1,14 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\User\Core\CyclistVerification\CyclistVerificationProcess" table="user_cyclist_verification_process">
+        <id name="id" column="id" type="user__cyclist_verification_process_id" length="36"/>
+        <field name="userId" column="user_id" type="s__user__user_id" unique="true" length="36"/>
+        <field name="profileDataVerified" column="profile_data_verified" type="boolean"/>
+        <field name="walletMinimumBalanceReached" column="wallet_minimum_balance_reached" type="boolean"/>
+        <field name="completed" column="completed" type="boolean"/>
+        <field name="history" column="history" type="user__cyclist_verification_history_collection"/>
+    </entity>
+</doctrine-mapping>

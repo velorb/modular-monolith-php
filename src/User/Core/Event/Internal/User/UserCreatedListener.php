@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\User\Core\Event\Internal\User;
 
 use App\Shared\Application\Bus\Event\IEventBus;
-use App\User\Core\Event\Integration\UserCreatedIE;
+use App\Shared\Application\Event\Integration\User\UserCreatedIE;
+use App\Shared\Domain\User\UserId;
 use App\User\Core\User\Event\UserCreated;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
@@ -21,8 +22,9 @@ class UserCreatedListener
     {
         $this->eventBus->dispatch(
             new UserCreatedIE(
-                $event->aggregateId->value,
-                $event->email->value()
+                new UserId($event->aggregateId->value),
+                $event->email,
+                $event->occurredAt,
             )
         );
     }

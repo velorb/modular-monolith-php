@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Integration\User\Core\Command\Internal\CreateUserFromSso;
 
 use App\Shared\Application\Bus\Event\IEvent;
+use App\Shared\Application\Event\Integration\User\UserCreatedIE;
 use App\Shared\Application\Exception\ValidationFailedException;
 use App\Shared\Domain\User\UserId;
 use App\Shared\Domain\User\UserRole;
@@ -14,7 +15,6 @@ use App\Tests\Support\ObjectMother\Shared\Domain\User\UserSsoIdOM;
 use App\Tests\Support\ObjectMother\User\Core\User\UserOM;
 use App\User\Core\Command\Internal\CreateUserFromSso\CreateUserFromSsoCommand;
 use App\User\Core\Command\Internal\CreateUserFromSso\CreateUserFromSsoHandler;
-use App\User\Core\Event\Integration\UserCreatedIE;
 use App\User\Core\User\IUserRepository;
 use PHPUnit\Framework\Attributes\Test;
 
